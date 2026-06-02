@@ -1,0 +1,23 @@
++++
+title = "Hello, World!"
+date = 2026-06-01
+description = "A test blog post to kick things off."
+[taxonomies]
+tags = ["test", "hello"]
++++
+
+This is a test blog post for **Side Effects**. If you're reading this, the site is up and running.
+
+<!-- more -->
+
+## What is this?
+
+Just a quick post to verify that Zola is building and serving content correctly. Here's a code snippet for good measure:
+
+```rust
+fn main() {
+    println!("Side effects may include blogging.");
+}
+```
+
+More real posts coming soon. Stay tuned.
