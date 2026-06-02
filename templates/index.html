@@ -6,6 +6,17 @@
 </head>
 <body>
   <h1>{{ section.title }}</h1>
-  <p><a href="/blog/">Blog</a></p>
+  {% set blog = get_section(path="blog/_index.md") %}
+  <h2>Recent Posts</h2>
+  {% for page in blog.pages %}
+  <article>
+    <h3><a href="{{ page.permalink }}">{{ page.title }}</a></h3>
+    <time datetime="{{ page.date }}">{{ page.date }}</time>
+    {% if page.description %}
+    <p>{{ page.description }}</p>
+    {% endif %}
+  </article>
+  {% endfor %}
+  <p><a href="/blog/">All posts →</a></p>
 </body>
 </html>

@@ -2,18 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>{{ section.title }}</title>
+  <title>{{ section.title }} | {{ config.title | default(value="Side Effects") }}</title>
 </head>
 <body>
-  <h1>{{ section.title }}</h1>
+  <h1><a href="/">{{ config.title | default(value="Side Effects") }}</a></h1>
+  <h2>{{ section.title }}</h2>
   {% for page in section.pages %}
   <article>
-    <h2><a href="{{ page.permalink }}">{{ page.title }}</a></h2>
-    <time>{{ page.date }}</time>
+    <h3><a href="{{ page.permalink }}">{{ page.title }}</a></h3>
+    <time datetime="{{ page.date }}">{{ page.date }}</time>
+    {% if page.description %}
+    <p>{{ page.description }}</p>
+    {% endif %}
     {% if page.summary %}
-    <p>{{ page.summary | safe }}</p>
+    <div>{{ page.summary | safe }}</div>
     {% endif %}
   </article>
   {% endfor %}
+  {% if section.pages | length == 0 %}
+  <p>No posts yet.</p>
+  {% endif %}
+  <nav>
+    {% if paginator is defined %}
+    {% if paginator.previous %}
+    <a href="{{ paginator.previous }}">← Newer</a>
+    {% endif %}
+    {% if paginator.next %}
+    <a href="{{ paginator.next }}">Older →</a>
+    {% endif %}
+    {% endif %}
+  </nav>
 </body>
 </html>
