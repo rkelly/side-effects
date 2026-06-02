@@ -77,6 +77,25 @@ design-for-maintainability angle are recurring themes.
 - Reasonable length: long enough to solve the problem, short enough that there's no
   padding. Quality over word count.
 
+## Sourcing and attribution
+
+- **Research-level sourcing.** Every factual claim about a tool, release, feature, or
+  behavior should be traceable to a primary source — official docs, changelogs, release
+  announcements, or the project's own blog. Search the web and fetch actual pages; don't
+  rely on training data alone.
+- **Use footnotes for sources.** Place references as markdown footnotes (`[^1]`,
+  `[^2]`, etc.) rather than inline links, so the prose stays clean. Collect footnote
+  definitions at the bottom of the post. Prefer official/primary sources over
+  third-party coverage.
+- **Attribute specifics.** When quoting or paraphrasing a feature description, release
+  date, or technical detail, attach a footnote to the claim so readers can verify it.
+- **Don't over-cite.** This is a blog, not a paper. Footnote the key claims (release
+  dates, feature names, how things work), not every sentence. A few footnotes per post
+  is usually right.
+- **Verify before publishing.** If a fact came from memory or a draft, confirm it against
+  the actual source before committing. Dates, version numbers, and feature names are the
+  ones that go stale fastest.
+
 ## Don't
 
 - Don't use hype or marketing language ("game-changing," "revolutionary," "unleash").
