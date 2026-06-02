@@ -52,8 +52,8 @@ Stick with standard Feature Specs when:
 
 It's worth noting that Feature Specs themselves come in two workflow variants — requirements-first and design-first[^3] — so Quick Plan is really a third option on a spectrum from most to least human oversight. The key insight is that it doesn't sacrifice rigor for speed; the same artifacts get produced either way. It just removes the waiting when you don't need it.
 
-[^1]: [Kiro 0.12 changelog](https://kiro.dev/changelog/ide/0-12/)
-[^2]: [Introducing Kiro](https://kiro.dev/blog/introducing-kiro/)
-[^3]: [Kiro Feature Specs documentation](https://kiro.dev/docs/specs/feature-specs/)
-[^4]: [Kiro Quick Plan documentation](https://kiro.dev/docs/specs/quick-plan/)
-[^5]: [Specs just got faster (and smarter) — Kiro blog](https://kiro.dev/blog/faster-smarter-specs/)
+[^1]: Kiro Team, "Kiro IDE 0.12 Changelog," kiro.dev, May 6, 2026. <https://kiro.dev/changelog/ide/0-12/>
+[^2]: Kiro Team, "Introducing Kiro," kiro.dev, July 14, 2025. <https://kiro.dev/blog/introducing-kiro/>
+[^3]: Kiro Team, "Feature Specs," Kiro Documentation. <https://kiro.dev/docs/specs/feature-specs/>
+[^4]: Kiro Team, "Quick Plan," Kiro Documentation. <https://kiro.dev/docs/specs/quick-plan/>
+[^5]: Ankit Sharma, "Specs just got faster (and smarter)," kiro.dev, May 12, 2026. <https://kiro.dev/blog/faster-smarter-specs/>
