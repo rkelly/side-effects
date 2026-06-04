@@ -6,7 +6,7 @@ description = "A test blog post to kick things off."
 tags = ["test", "hello"]
 +++
 
-This is a test blog post for **Side Effects**. If you're reading this, the site is up and running.
+This is a test blog post for **Side Effects May Vary**. If you're reading this, the site is up and running.
 
 <!-- more -->
 

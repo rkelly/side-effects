@@ -1,5 +1,5 @@
 base_url = "https://sideeffects.kelly.ws"
-title = "Side Effects"
+title = "Side Effects May Vary"
 theme = "slim"
 compile_sass = true
 build_search_index = false
