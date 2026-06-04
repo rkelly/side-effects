@@ -1,1 +1,1 @@
-Read .ai/AI.md for project guidance before starting work.
+Read AI.md for project guidance before starting work.
