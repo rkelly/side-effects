@@ -83,15 +83,16 @@ design-for-maintainability angle are recurring themes.
   behavior should be traceable to a primary source — official docs, changelogs, release
   announcements, or the project's own blog. Search the web and fetch actual pages; don't
   rely on training data alone.
-- **Use footnotes for sources.** Place references as markdown footnotes (`[^1]`,
-  `[^2]`, etc.) rather than inline links, so the prose stays clean. Collect footnote
-  definitions at the bottom of the post. Prefer official/primary sources over
+- **References section, not footnotes.** Collect sources in a `## References` section at
+  the end of the post. Each entry is a bullet with bold author, title, date, and a
+  linked short domain name — e.g.
+  `- **Author.** "Title," site, date. [domain.example](https://...)`. Mention authors or
+  sources naturally in the prose where it helps ("Parasuraman et al. frame this as…")
+  but don't litter the text with numbered markers. Prefer official/primary sources over
   third-party coverage.
-- **Attribute specifics.** When quoting or paraphrasing a feature description, release
-  date, or technical detail, attach a footnote to the claim so readers can verify it.
-- **Don't over-cite.** This is a blog, not a paper. Footnote the key claims (release
-  dates, feature names, how things work), not every sentence. A few footnotes per post
-  is usually right.
+- **Don't over-cite.** This is a blog, not a paper. A References section with the key
+  sources is usually enough — cite the claims that matter (release dates, feature names,
+  how things work), not every sentence.
 - **Verify before publishing.** If a fact came from memory or a draft, confirm it against
   the actual source before committing. Dates, version numbers, and feature names are the
   ones that go stale fastest.
