@@ -14,7 +14,7 @@ The recurring decision this method was built for is mundane to state and surpris
 
 The instrument most teams reach for is an automation maturity ladder: manual at the bottom, scripted above it, declarative above that, autonomous at the top, with an implied instruction to climb. The trouble is that the ladder encodes a claim that doesn't survive scrutiny — that more automation is always better. It isn't. Over-automating a problem is a real and expensive failure mode, and a ladder is structurally incapable of seeing it, because it only measures height.
 
-So the intention behind SPF was narrow and practical: a way to choose software that is matched to what a need actually requires, and that treats over-engineering as the failure it is. That intention has good precedent. The levels-of-automation literature has long framed its central question not as *how high can we go* but as which functions should be automated *and to what extent* — an explicitly bidirectional question (Parasuraman, Sheridan & Wickens, 2000). SPF takes that same posture and points it at software selection.
+So the intention behind SPF was narrow and practical: a way to choose software that is matched to what a need actually requires, and that treats over-engineering as the failure it is. That intention has good precedent. The levels-of-automation literature has long framed its central question not as *how high can we go* but as which functions should be automated *and to what extent* — an explicitly bidirectional question (Parasuraman, Sheridan and Wickens, 2000). SPF takes that same posture and points it at software selection.
 
 <!-- more -->
 

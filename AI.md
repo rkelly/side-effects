@@ -122,8 +122,17 @@ A personal blog/website built with [Zola](https://www.getzola.org/), a fast stat
 ## Site details
 
 - **Base URL:** https://sideeffects.kelly.ws
+- **Theme:** [Slim](https://github.com/jameshclrk/zola-slim) (git submodule)
 - **Syntax highlighting theme:** catppuccin-mocha
 - **Taxonomy:** tags
+
+### Slim theme quirks
+
+- **`<!-- more -->` summaries and entities.** The listing template renders summaries
+  through `{{ page.summary | safe | striptags }}`, which strips HTML tags but doesn't
+  decode entities. A literal `&` in the summary text shows up as `&amp;` on the home
+  page. Avoid `&` (use "and"), special characters, and inline HTML in the text before
+  the `<!-- more -->` break.
 
 ## Project structure
 
