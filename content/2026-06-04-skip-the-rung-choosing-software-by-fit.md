@@ -2,6 +2,7 @@
 title = "SPF: Choosing Software by Fit, Not by Ladder"
 date = 2026-06-04
 description = "Automation maturity models tell you to climb one rung at a time. But rungs aren't stations you have to stop at — and while you wait, the market keeps shipping new entrants that can carry you further, with better documentation, than anything you'd build yourself. SPF — Stack, Paradigm, Fit — is a fit-first way to choose software."
+draft = true
 
 [taxonomies]
 tags = ["architecture", "tooling", "buy-vs-build", "decision-making"]
