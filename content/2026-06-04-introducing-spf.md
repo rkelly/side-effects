@@ -12,8 +12,6 @@ toc = true
 
 The recurring decision this method was built for is mundane to state and surprisingly hard to settle: given a need, what software should we adopt to meet it, and in what order relative to everything else on the roadmap? The instance that prompted it was a sequencing question — whether to put declarative configuration of our database environment ahead of building pipeline orchestration. Both were defensible. What was missing wasn't an opinion; it was an honest way to *score* the choice, so the answer rested on something more durable than whoever argued longest.
 
-<!-- more -->
-
 The instrument most teams reach for is an automation maturity ladder: manual at the bottom, scripted above it, declarative above that, autonomous at the top, with an implied instruction to climb. The trouble is that the ladder encodes a claim that doesn't survive scrutiny — that more automation is always better. It isn't. Over-automating a problem is a real and expensive failure mode, and a ladder is structurally incapable of seeing it, because it only measures height.
 
 So the intention behind SPF was narrow and practical: a way to choose software that is matched to what a need actually requires, and that treats over-engineering as the failure it is. That intention has good precedent. The levels-of-automation literature has long framed its central question not as *how high can we go* but as which functions should be automated *and to what extent* — an explicitly bidirectional question (Parasuraman, Sheridan & Wickens, 2000). SPF takes that same posture and points it at software selection.
@@ -58,6 +56,21 @@ SPF's five paradigm levels are what you get when you lay those two strands along
 
 It matters to be honest that this is a braid. The two strands co-vary in infrastructure tooling, which is why one axis is workable, but they are independent in principle — Terraform is fully declarative yet decides nothing at runtime, and a hand-coded control loop is highly autonomous yet thoroughly imperative. Neither levels-of-automation nor the imperative/declarative distinction can express the other on its own; the SAE-style scales say nothing about specification style, and the paradigm distinction says nothing about autonomy. For a tool that sits off the diagonal where the two strands part ways, score it by its autonomy and flag it for a closer look.
 
+## The framework as a matrix
+
+Put the two axes together and you get a grid, and because every cell is a real category of solution, the matrix doubles as a map of the tooling landscape: a need lives in a *row*, and choosing software means picking a *column*. Here it is filled in with representative tools — placements are approximate, since plenty of tools straddle two columns:
+
+| Stack layer ↓ / Paradigm → | 0 · Manual | 1 · Imperative | 2 · Declarative | 3 · Assisted | 4 · Autonomous |
+|---|---|---|---|---|---|
+| **1 · Infra provisioning** | cloud-console click-ops | Azure / AWS CLI, shell | Terraform, Bicep, CloudFormation, Pulumi | AI-assisted IaC behind review | autoscalers (Karpenter, Cluster Autoscaler) |
+| **2 · Host / OS config** | SSH in and edit | bash, Ansible (procedural) | Puppet, Chef, DSC, Ansible (state) | drift detection w/ suggested fixes | self-healing config agents (CFEngine) |
+| **3 · Service config** (e.g. SQL Server) | SSMS, hand-run T-SQL | `sp_configure` / setup scripts | SqlServerDsc, DSC, dbatools | policy-as-code w/ review, SQL Assessment | continuous drift auto-remediation |
+| **4 · Schema / data model** | hand-run `ALTER` statements | bespoke migration scripts | dbt, Flyway, Liquibase, DACPAC | AI-generated migrations to review | auto-applied schema evolution |
+| **5 · Orchestration** | run jobs by hand | cron + scripts, classic Airflow / Prefect DAGs | Dagster assets, Kestra, Airflow assets | AI-authored pipelines behind a gate | self-healing / agentic orchestration |
+| **6 · Data products / observability** | spreadsheets, eyeballing | custom monitoring scripts | data contracts, OpenLineage, dbt tests | anomaly detection, alerts to review | autonomous data-quality remediation |
+
+Reading left to right, each column hands more of the work to the machine. Two things from the rest of this post are already visible in the grid: artifact authority is richest in the declarative and assisted columns and thins out at autonomous, and the rule of least power says pick the *leftmost* column that fully covers the need. The matrix shows what exists; the Fit score, next, tells you which column to aim for.
+
 ## Scoring fit: the heart of the method
 
 This is what separates SPF from a relabeled ladder. Rather than scoring how high a solution climbs, you score how *close* it lands to what the need requires. Three numbers per capability.
@@ -92,8 +105,8 @@ To make it concrete, here is SPF reading three illustrative capabilities. Each r
 | Capability | Stack layer | Needs | Today | Fit | The move |
 |---|---|:---:|:---:|:---:|---|
 | Database configuration | 3 · service config | 2 · declarative | 0 · manual | **−2** | Adopt a mature declarative tool |
-| One-off data backfill | 5 · orchestration | 1 · imperative | 4 · autonomous | **+3** | Over-built — replace the agent with a script |
 | Schema migrations | 4 · schema | 2 · declarative | 2 · declarative | **0** | Matched — leave it alone |
+| One-off data backfill | 5 · orchestration | 1 · imperative | 4 · autonomous | **+3** | Over-built — replace the agent with a script |
 
 <figure style="margin:2rem 0;">
 <svg width="100%" viewBox="0 0 760 450" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="An SPF map plotting three capabilities. Database configuration sits at manual and should move rightward to declarative. A one-off backfill sits at autonomous and should move left to imperative because it is over-built. Schema migrations already sit at declarative, their fit level, and should be left alone.">
@@ -147,7 +160,26 @@ To make it concrete, here is SPF reading three illustrative capabilities. Each r
 <figcaption style="font-size:0.9em; color:#6B655B; text-align:center; margin-top:0.5rem;">Three capabilities on the SPF map. Vertical position is the stack layer; horizontal position is the paradigm. Every recommended move points toward the fit level — rightward for the under-served database config, leftward for the over-built backfill, and nowhere at all for the already-matched migrations.</figcaption>
 </figure>
 
-The signed fit is what makes the middle row legible. On a paradigm axis alone it scores a 4 — top of the ladder, apparently exemplary. SPF reads it as over-built: runtime autonomy spent on a job that runs once, where an imperative script is the better fit. And the matched migrations score a priority of zero and earn the rarest recommendation in software — leave them alone.
+The signed fit is what makes the backfill row legible. On a paradigm axis alone it scores a 4 — top of the ladder, apparently exemplary. SPF reads it as over-built: runtime autonomy spent on a job that runs once, where an imperative script is the better fit. And the matched migrations score a priority of zero and earn the rarest recommendation in software — leave them alone.
+
+## Scoring one solution against another
+
+The per-capability picture above reads the *current* state. But because Fit is a number, the same machinery scores *competing solutions* against the enterprise's needs, so you can rank one vendor or approach against another and defend the choice.
+
+Suppose the enterprise has three needs, each with a needed level and a stakes weight, and three candidate approaches are on the table: build it ourselves with scripts (which lands every need at imperative), adopt a declarative platform (declarative across the board), or buy an autonomous AI-ops suite (autonomous everywhere). Scoring each need as signed fit, then weighting by stakes:
+
+| Enterprise need | Stack | Needs (N) | Stakes | Scripts · lvl 1 | Declarative platform · lvl 2 | Autonomous suite · lvl 4 |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|
+| Database configuration | 3 | 2 | 3 | −1 → 3 | 0 → 0 | +2 → 6 |
+| Schema migrations | 4 | 2 | 2 | −1 → 2 | 0 → 0 | +2 → 4 |
+| Pipeline orchestration | 5 | 2 | 2 | −1 → 2 | 0 → 0 | +2 → 4 |
+| **Total weighted misfit** | | | | **7** | **0** | **14** |
+
+*Each cell is signed fit → weighted misfit (|fit| × stakes). Lower total is a better fit for the enterprise.*
+
+The ranking is the whole argument in one number. The declarative platform wins outright with zero misfit. The autonomous suite — top of the ladder, the "most advanced" option, the one with the best demo — scores *worst*, because it over-serves every need and charges you for power you won't use. The scripts leave everything under-served. A maturity score would have ranked these three in exactly the wrong order; SPF ranks them by fit.
+
+This also handles the messy real case where solutions cover different things. If a candidate doesn't address a need at all, score it as level 0 for that row — a large under-served misfit — which is precisely how a narrow point-tool loses to a platform that covers more of the enterprise's needs, even when the point-tool is slicker at the one thing it does.
 
 ## What the scores tell you to do
 
