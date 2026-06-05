@@ -1,4 +1,4 @@
-base_url = "https://rkelly.github.io/side-effects"
+base_url = "https://sideeffects.kelly.ws"
 title = "Side Effects May Vary"
 theme = "slim"
 compile_sass = true
