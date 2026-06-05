@@ -16,6 +16,8 @@ The instrument most teams reach for is an automation maturity ladder: manual at 
 
 So the intention behind SPF was narrow and practical: a way to choose software that is matched to what a need actually requires, and that treats over-engineering as the failure it is. That intention has good precedent. The levels-of-automation literature has long framed its central question not as *how high can we go* but as which functions should be automated *and to what extent* — an explicitly bidirectional question (Parasuraman, Sheridan & Wickens, 2000). SPF takes that same posture and points it at software selection.
 
+<!-- more -->
+
 ## What SPF is
 
 SPF assesses a need, and the candidate solutions that could meet it, and produces a recommendation you can defend rather than merely assert. The name is the method — it makes you look at three things:

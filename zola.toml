@@ -13,8 +13,10 @@ name = "tags"
 rss = true
 
 [extra]
+author = "Richard Kelly"
 slim_summary = true
 slim_content = false
+slim_footer = "&copy; Richard Kelly · <a href=\"https://creativecommons.org/licenses/by/4.0/\">CC BY 4.0</a>"
 slim_menu = [
     {url = "$BASE_URL/tags", name = "Tags"},
 ]
